@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast - Professional Weather Forecast</title>
+
+    <!-- Cache-Control Meta Tags -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css?v=b7n2m1">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">Sky<span>Cast</span></div>
+            <div class="search-container">
+                <input type="text" id="city-input" placeholder="Enter city name..." autocomplete="off">
+                <button id="location-btn" title="Use current location">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </button>
+                <button id="search-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+            </div>
+        </header>
+
+        <main id="main-content" class="hidden">
+            <section class="current-weather">
+                <div class="location-info">
+                    <h1 id="city-name">Loading...</h1>
+                    <p id="current-date"></p>
+                </div>
+
+                <div class="weather-display">
+                    <div class="main-temp">
+                        <span id="temperature">--</span><span class="unit">°C</span>
+                    </div>
+                    <div class="weather-status">
+                        <div id="weather-icon-large"></div>
+                        <p id="weather-description">--</p>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <span class="label">Feels Like</span>
+                        <span id="feels-like" class="value">--°C</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Humidity</span>
+                        <span id="humidity" class="value">--%</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Wind Speed</span>
+                        <span id="wind-speed" class="value">-- km/h</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">UV Index</span>
+                        <span id="uv-index" class="value">--</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="forecast">
+                <h2>7-Day Forecast</h2>
+                <div id="forecast-container" class="forecast-grid">
+                    <!-- Forecast items will be injected here -->
+                </div>
+            </section>
+        </main>
+
+        <div id="loading" class="status-message">
+            <div class="spinner"></div>
+            <p>Fetching weather data...</p>
+        </div>
+
+        <div id="error-message" class="status-message hidden">
+            <p>Could not find location. Please try again.</p>
+        </div>
+
+        <div id="welcome-message" class="status-message">
+            <p>Enter a city to see the current weather and forecast.</p>
+        </div>
+    </div>
+
+    <script src="script.js?v=b7n2m1"></script>
+</body>
+</html>
