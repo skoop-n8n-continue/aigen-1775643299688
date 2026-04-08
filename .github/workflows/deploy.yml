@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - draft
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main-content
+
+      - name: Checkout draft
+        uses: actions/checkout@v4
+        with:
+          ref: draft
+          path: draft-content
+        continue-on-error: true
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Prepare public
+        run: |
+          mkdir -p public
+          if [ -d "main-content" ]; then
+            cp -r main-content/* public/
+          fi
+          if [ -d "draft-content" ]; then
+            mkdir -p public/draft
+            cp -r draft-content/* public/draft/
+          fi
+          # Remove .github folder from public to avoid recursion
+          rm -rf public/.github
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
